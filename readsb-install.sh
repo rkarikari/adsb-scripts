@@ -41,7 +41,7 @@ function copyNoClobber() {
     fi
 }
 
-repository="https://github.com/wiedehopf/readsb.git"
+repository="https://github.com/rkarikari/readsb.git"
 
 
 if [[ -n "$push_30004" ]]; then
@@ -50,9 +50,9 @@ cat >/etc/default/readsb <<"EOF"
 # This is sourced by /etc/systemd/system/default.target.wants/readsb.service as
 # daemon startup configuration.
 
-RECEIVER_OPTIONS="--device 0 --device-type rtlsdr --gain -10 --ppm 0"
-DECODER_OPTIONS="--max-range 450 --write-json-every 1 --net-connector 127.0.0.1,30004,beast_out"
-NET_OPTIONS="--net --net-heartbeat 60 --net-ro-size 1280 --net-ro-interval 0.05 --net-ri-port 20001 --net-ro-port 20002 --net-sbs-port 20003 --net-bi-port 20004,20104 --net-bo-port 20005"
+RECEIVER_OPTIONS="--device 0 --device-type rtlsdr --gain -10 --ppm -2"
+DECODER_OPTIONS="--max-range 450 --write-json-every 1"
+NET_OPTIONS="--net --net-heartbeat 60 --net-ro-size 1250 --net-ro-interval 0.05 --net-ri-port 30001 --net-ro-port 30002 --net-sbs-port 30003 --net-bi-port 30104 --net-bo-port 30005"
 JSON_OPTIONS="--json-location-accuracy 2 --range-outline-hours 24"
 EOF
 fi

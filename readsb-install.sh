@@ -75,7 +75,7 @@ mkdir -p $ipath
 
 if grep -E 'wheezy|jessie' /etc/os-release -qs; then
     # make sure the rtl-sdr rules are present on ancient systems
-    wget -O /tmp/rtl-sdr.rules https://raw.githubusercontent.com/wiedehopf/adsb-scripts/master/osmocom-rtl-sdr.rules
+    wget -O /tmp/rtl-sdr.rules https://raw.githubusercontent.com/rkarikari/adsb-scripts/master/osmocom-rtl-sdr.rules
     cp /tmp/rtl-sdr.rules /etc/udev/rules.d/
 fi
 
@@ -279,7 +279,7 @@ echo --------------
 cd "$ipath"
 
 if [[ -z "$NO_TAR1090" ]] ; then
-    wget -O tar1090-install.sh https://raw.githubusercontent.com/wiedehopf/tar1090/master/install.sh
+    wget -O tar1090-install.sh https://raw.githubusercontent.com/rkarikari/tar1090/master/install.sh
     bash tar1090-install.sh /run/readsb
 fi
 
@@ -298,7 +298,7 @@ if ! systemctl show readsb | grep 'ExecMainStatus=0' -qs; then
         echo "       common issues: SDR not plugged in."
         echo "       the webinterface will show an error until readsb is running!"
         echo "       If you can't fix the issue:"
-        echo "            Open a github issue or contact wiedehopf on discord (https://discord.gg/DxU4VG37JS) and post the above 30 lines of log!"
+        echo "            Open a github issue ."
         echo --------------
     fi
 else

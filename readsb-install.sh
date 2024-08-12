@@ -70,7 +70,7 @@ if grep -E 'wheezy|jessie' /etc/os-release -qs; then
     rmmod dvb_usb_rtl28xxu &>/dev/null || true
 fi
 
-ipath=/usr/local/share/adsb-wiki/readsb-install
+ipath=/usr/local/share/adsb-scripts/readsb-install
 mkdir -p $ipath
 
 if grep -E 'wheezy|jessie' /etc/os-release -qs; then

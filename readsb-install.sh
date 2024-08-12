@@ -92,7 +92,7 @@ if command -v apt &>/dev/null; then
         packages+=(libzstd-dev libzstd1)
     fi
     if ! command -v nginx &>/dev/null && [[ -z "$NO_TAR1090" ]] ; then
-        packages+=(lighttpd)
+        packages+=(nginx)
     fi
     aptInstall "${packages[@]}"
 fi

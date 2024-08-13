@@ -52,7 +52,7 @@ cat >/etc/default/readsb <<"EOF"
 
 RECEIVER_OPTIONS="--device 0 --device-type rtlsdr --gain -10 --ppm -2"
 DECODER_OPTIONS="--max-range 450 --write-json-every 1"
-NET_OPTIONS="--net --net-heartbeat 60 --net-ro-size 1250 --net-ro-interval 0.05 --net-ri-port 30001 --net-ro-port 30002 --net-sbs-port 30003 --net-bi-port 30104 --net-bo-port 30005"
+NET_OPTIONS="--net --net-heartbeat 60 --net-ro-size 1250 --net-ro-interval 0.05 --net-ro-interval-beast-reduce=0.12 --net-ri-port 30001 --net-ro-port 30002 --net-sbs-port 30003 --net-bi-port 30104 --net-bo-port 30005"
 JSON_OPTIONS="--json-location-accuracy 2 --range-outline-hours 24"
 EOF
 fi

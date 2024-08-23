@@ -87,18 +87,20 @@ function aptInstall() {
 }
 
 if command -v apt &>/dev/null; then
-    packages=(git gcc make libusb-1.0-0-dev ncurses-dev ncurses-bin zlib1g-dev zlib1g pkg-config)
+    packages=(git gcc make libusb-1.0-0-dev ncurses-dev ncurses-bin zlib1g-dev zlib1g pkg-config libc6-dev)
     if ! grep -E 'wheezy|jessie' /etc/os-release -qs; then
         packages+=(libzstd-dev libzstd1)
     fi
     if ! command -v nginx &>/dev/null && [[ -z "$NO_TAR1090" ]] ; then
         packages+=(nginx curl)
     fi
+    packages+=(librtlsdr-dev)
+    if grep -qs -e 'Ubuntu 24' /etc/os-release; then
+        packages+=(librtlsdr2)
+    else
+        packages+=(librtlsdr0)
+    fi
     aptInstall "${packages[@]}"
-fi
-if command -v apt &>/dev/null; then
-    packages=(librtlsdr-dev librtlsdr0)
-    aptInstall "${packages[@]}" || true # hope for the best
 fi
 
 udevadm control --reload-rules || true

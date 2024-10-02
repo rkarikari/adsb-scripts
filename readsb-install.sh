@@ -285,7 +285,7 @@ echo --------------
 cd "$ipath"
 
 if [[ -z "$NO_TAR1090" ]] ; then
-    wget -O tar1090-install.sh https://raw.githubusercontent.com/rkarikari/tar1090/master/install.sh
+    wget -O tar1090-install.sh https://github.com/rkarikari/tar1090/raw/master/install.sh
     bash tar1090-install.sh /run/readsb
 fi
 

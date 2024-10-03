@@ -8,8 +8,8 @@ rm -rf $ipath
 mkdir -p $ipath
 cd $ipath
 
-wget -O $ipath/zram-swap.sh https://raw.githubusercontent.com/wiedehopf/adsb-scripts/master/zram-swap.sh
-wget -O /lib/systemd/system/zram-swap.service https://raw.githubusercontent.com/wiedehopf/adsb-scripts/master/zram-swap.service
+wget -O $ipath/zram-swap.sh https://raw.githubusercontent.com/rkarikari/adsb-scripts/master/zram-swap.sh
+wget -O /lib/systemd/system/zram-swap.service https://raw.githubusercontent.com/rkarikari/adsb-scripts/master/zram-swap.service
 
 systemctl enable zram-swap
 systemctl start zram-swap

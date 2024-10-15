@@ -68,7 +68,7 @@ function vm_tweaks () {
     # increase the setting if it's less than 8192
     min_free_kbytes=$(cat /proc/sys/vm/min_free_kbytes)
     total_mem_kbytes=$(grep -e MemTotal /proc/meminfo | tr -s ' ' | cut -d' ' -f2)
-    if (( min_free_kbytes > 8192 )) && (( total_mem_kbytes < 1024 * 1024 )) || (( min_free_kbytes < 8192 )); then
+    if (( min_free_kbytes > 8192 )) && (( total_mem_kbytes < 2048 * 1024 )) || (( min_free_kbytes < 8192 )); then
         echo 8192 > /proc/sys/vm/min_free_kbytes
     fi
 

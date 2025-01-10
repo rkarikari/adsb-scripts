@@ -31,6 +31,9 @@ do
         push-30004)
             push_30004=yes
             ;;
+        binary-only)
+            BINARY_ONLY=yes
+            ;;
         no-tar1090)
             NO_TAR1090=yes
             ;;
@@ -112,6 +115,7 @@ if command -v apt &>/dev/null; then
 fi
 
 udevadm control --reload-rules || true
+udevadm trigger || true
 
 function getGIT() {
     # getGIT $REPO $BRANCH $TARGET-DIR
@@ -162,24 +166,30 @@ else
     fi
 fi
 
-cp -f debian/readsb.service /lib/systemd/system/readsb.service
 
 rm -f /usr/bin/readsb /usr/bin/viewadsb
 cp -f readsb /usr/bin/readsb
 cp -f viewadsb /usr/bin/viewadsb
 
+cp -f debian/readsb.service /lib/systemd/system/readsb.service
 copyNoClobber debian/readsb.default /etc/default/readsb
+
+if [[ -n "$BINARY_ONLY" ]]; then
+    systemctl restart readsb
+    echo /usr/bin/readsb has been replaced with an updated version
+    exit 0
+fi
 
 if ! id -u readsb &>/dev/null
 then
-    adduser --system --home $ipath --no-create-home --quiet readsb || adduser --system --home-dir $ipath --no-create-home readsb
-    adduser readsb plugdev || true # USB access
-    adduser readsb dialout || true # serial access
+    adduser --system --no-create-home readsb
+    adduser readsb plugdev # SDR access (via udev rules)
+    adduser readsb dialout # serial access
 fi
 
 apt remove -y dump1090-fa &>/dev/null || true
-systemctl disable --now dump1090-mutability &>/dev/null || true
-systemctl disable --now dump1090 &>/dev/null || true
+apt remove -y dump1090-mutability &>/dev/null || true
+apt remove -y dump1090 &>/dev/null || true
 
 rm -f /etc/lighttpd/conf-enabled/89-dump1090.conf
 
